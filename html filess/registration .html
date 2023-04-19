@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Log-in for staff </title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+  <link rel="stylesheet" href="./homepage.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <style>
+    .quote {
+      background-color: #f7f7f7;
+      border: 1px solid #e5e5e5;
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    .welcome {
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      padding: 30px;
+      display: none;
+    }
+
+    .content {
+      position: relative;
+    }
+
+
+
+    .panel-default {
+      border-color: #ddd;
+      box-shadow: none;
+    }
+
+    .panel-default>.panel-heading {
+      background-color: #f8f8f8;
+      border-color: #ddd;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .panel-default>.panel-heading h3.panel-title {
+      font-size: 18px;
+    }
+
+    .form-horizontal .form-group {
+      margin: 20px 0;
+    }
+
+    .form-horizontal .control-label {
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .form-horizontal .form-control {
+      border-radius: 0;
+      font-size: 16px;
+    }
+
+    .form-horizontal .checkbox label {
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .btn-default {
+      background-color: #5cb85c;
+      border-color: #5cb85c;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active {
+      background-color: #449d44;
+      border-color: #449d44;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 quote">
+        <blockquote>
+          <p>Hello Staff, Register here! <br> Please enter your details to access your dashboard.</p>
+        </blockquote>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6 content">
+          <form class="form">
+            <h2 class="text-center">Staff Registration Login</h2>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmpassword" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Address:</label>
+                <input type="password" class="form-control" id="address" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Phone:</label>
+                <input type="password" class="form-control" id="Phone" required>
+              </div>
+              <div class="form-group">
+                
+              </div>
+            <button type="submit" class="btn btn-primary btn-block"><a href="dashboard.html" style="text-decoration: none; color: white;">Register</a></button>
+           <br><p>Already have Account? <a href="log in.html">log in</a></p>
+
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        // When the page is loaded, hide the login form
+        $('#login-form').hide();
+
+        // Alternatively, you could redirect the user to another page after login
+        // window.location.href = 'dashboard.html';
+      });
+
+    </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

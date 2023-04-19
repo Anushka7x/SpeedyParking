@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Visitor</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.min.js"></script>
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="stylesheet" href="./Style.css">
+</head>
+
+<body class="Apart">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-logo" href="#"><img src="speedy-parking-low-resolution-logo-color-on-transparent-background.png" width="70" style="padding: 3px;">
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a href="dashboard.html">Dashboard</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Parking
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="appartmentpark.html">Appartment</a></li>
+                            <li><a href="Add public parking SM (1).html">Public</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="parkingusage.html">Parking Usage</a></li>
+                    <li><a href="twowheeler.html">Two-Wheeler</a></li>
+                    <li><a href="fourwheeler.html">Four-Wheeler</a></li>
+                    <li class="nav-item active"><a href="visiter SM.html">Visitor</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user-circle"></i>
+
+                            <span class=""></span></a>
+                        <ul class="dropdown-menu" style="padding: 30px;">
+                            <div class="card card-danger">
+                                <div class="card-heading text-center"> <i class="fas fa-user-circle"></i></div>
+                                <p>Name: ABC<br>
+                                    Email: abc@gmail.com<br>
+                                <button type="edit" class="btn btn-success"><a href="Admin.html"> My
+                                        Profile</a></button>
+
+                            </div>
+
+                        </ul>
+                    </li>
+                    <li><a href="log in.html"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="panel panel-default sacard">
+                            <div class="panel-heading">
+                                <div class="panel-title satitle">Vehicle IN</div>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">Vehicle No:</label>
+                                        <input type="text" class="form-control" id="name"
+                                            placeholder="Enter vehicle no">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                value="option1">
+                                            Car
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2"
+                                                value="option2">
+                                            Bike
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="intime">IN Time:</label>
+                                        <input type="time" id="intime" name="intime">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="payment-type">Payment Type:</label>
+                                        <select class="form-control" id="payment-type">
+                                            <option>Cash</option>
+                                            <option>UPI</option>
+                                            <option>Google Pay</option>
+                                            <option>phonepay</option>
+                                            <option>payTM</option>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                        
+                        <form>
+                        <button type="cancel" class="btn btn-danger ">Cancel</button>
+                        <button type="submit" class="btn btn-primary">DONE</button>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Appartment Status</div>
+                    <div class="panel-body">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Vehicle No.</th>
+                                    <th>Location</th>
+                                    <th>Payment Type</th>
+                                    <th>IN Status</th>
+                                    <th>OUT Status</th>
+                                    <th>Action</th>
+                                </tr>
+                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A</td>
+                                    <td>ABC 123</td>
+                                    <td>Colony</td>
+                                    <td>UPI</td>
+                                    <td>2023-05-31/23 march</td>
+                                    <td>2023-05-31/24 march</td>
+                                    <td>
+                                        <!--edit modal--><a><i class="fas fa-edit"></i></a>
+
+                                        <!-- Delete Icon with Modal -->
+                                        <a href="#" class="delete-btn" data-toggle="modal" data-target="#deleteModal"><i
+                                                class="fas fa-trash-alt"></i></a>
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Delete Item
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this item?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>A</td>
+                                    <td>123</td>
+                                    <td>Harda</td>
+                                    <td>cash</td>
+                                    <td>12:03 pm/23-03-23</td>
+                                    <td>12:03 pm/23-03-23</td>
+                                    <td>
+                                        <a><button class="btn btn-success">IN</button></a></td>
+                                  </tr>
+                            </tbody>
+                        </table>
+
+                        <button class="btn btn-secondary">Edit Fields</button>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+           
+                        
+ 
+   
+    <hr class="my-hr">
+    <footer class="footer ">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-4">
+                  <h4>About Us</h4>
+                  <hr class="my-hr">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices ipsum et odio
+                      tincidunt eleifend. Nulla lobortis turpis et urna feugiat fringilla. Nulla facilisi.</p>
+              </div>
+              <div class="col-md-4">
+                  <h4>Quick Links</h4>
+                  <hr class="my-hr">
+                  <ul class="list-unstyled">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Dashboard</a></li>
+                      <li><a href="#">Settings</a></li>
+                      <li><a href="#">Logout</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-4">
+                  <h4>Contact Us</h4>
+                  <hr class="my-hr">
+                  <ul class="list-unstyled">
+                      <li><i class="fa fa-map-marker"></i> 123 Indore, Madhya Pradesh, India</li>
+                      <li><i class="fa fa-envelope"></i> info@example.com</li>
+                      <li><i class="fa fa-phone"></i> 0000000000</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

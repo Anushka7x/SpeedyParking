@@ -1,0 +1,155 @@
+/*style.css*/
+
+/* style for navbar*/
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    line-height: 2.428571;
+    color: #255e98;
+    background-color: #b5c8e05e;
+}
+
+.container {
+    padding: 10px;
+}
+
+.navbar-default {
+    background-color: #729abd;
+    border-color: #2e6da4;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    background-color: #286090;
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    background-color: #3b7aad;
+    color: #fff;
+}
+
+/* /panel css internal in dashboard */
+/* Appartment page css */
+
+
+/* card css */
+.acard {
+    padding: 40px;
+    background-color: #3b7aad;
+}
+
+.modal-backdrop {
+    z-index: 0 !important;
+}
+
+.my-hr {
+    border-color: #255e98;
+}
+
+/* parking usage */
+
+.jumbotron {
+    background-color: #222;
+    color: #fff;
+    padding: 50px;
+    margin-bottom: 30px;
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .container .jumbotron,
+    .container-fluid .jumbotron {
+        padding-right: 60px;
+        border-radius: 25px;
+        padding-left: 60px;
+    }
+}
+
+/* login page */
+.quote {
+    background-color: #b5cfe888;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.loginbody {
+    background-color: #2e6da48d;
+    height: 100%;
+}
+
+.Amain {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logo-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20%;
+    min-height: 20%;
+}
+
+/* Visitor page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  @media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+  
+    th {
+      text-align: center;
+    }
+  
+    tbody tr {
+      border-bottom: none;
+    }
+  
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+  
+    td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+  }
+  /* for search tab */
+#search {
+  height: 20px;
+  font-size: 20px;
+}
+
