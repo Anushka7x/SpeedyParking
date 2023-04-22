@@ -3,9 +3,17 @@
 <?php
 include('action.php');
 include('auth.php');
+$sql = "SELECT COUNT(*) FROM 
+(SELECT vehicle_number FROM two_wheeler
+ UNION ALL
+ SELECT vehicle_number FROM four_wheeler) AS all_vehicles
+";
+$result = mysqli_query($conn, $sql);
+$occupied = mysqli_fetch_array($result)[0];
 
+$available = 500 - $occupied;
+$percent_available = ($available / 500) * 100;
 ?>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,25 +63,26 @@ include('auth.php');
         <div class="row">
             <div class="col-sm-4">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Total Capacity</div>
+                    <div class="panel-heading"><?php   echo "Total parking: ";?></div>
                     <div class="panel-body">
-                        <?php ?>
+                        <?php echo '500'?>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-success">
-                    <div class="panel-heading">Available Parking Slots</div>
+                    <div class="panel-heading"><?php echo "Available parking slots: ";
+?></div>
                     <div class="panel-body">
-                        <?php ?>
+                        <?php echo $available?>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-danger">
-                    <div class="panel-heading">Occupied Parking</div>
+                    <div class="panel-heading">Total Parking till now</div>
                     <div class="panel-body">
-                        <?php ?>
+                        <?php echo $occupied ?>
                     </div>
                 </div>
             </div>
@@ -88,9 +97,9 @@ include('auth.php');
                         <h3 class="panel-title">Overview</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Total Parking Spaces: 100</p>
-                        <p>Available Spaces: 25</p>
-                        <p>Occupancy Rate: 75%</p>
+                        <p>Total Parking Spaces:500</p>
+                        <p>Available Spaces: <?php echo $available?></p>
+                        <p><?php echo "Average Occupacy $percent_available"?></p>
                     </div>
                 </div>
             </div>
@@ -101,7 +110,7 @@ include('auth.php');
                     </div>
                     <div class="panel-body">
                         <p>Peak Usage Times: 12:00 pm - 2:00 pm</p>
-                        <p>Most Frequently Used Parking Area: Lot A</p>
+                        <p>Most Frequently Used Parking Area: Zone 1 Lot 1</p>
                         <p>Average Occupancy Rate: 70%</p>
                     </div>
                 </div>
@@ -140,30 +149,21 @@ include('auth.php');
                                     value="four_wheeler" required>
                                 <label class="form-check-label" for="four_wheeler">Four Wheeler</label>
                             </div>
-                            <div class="form-group">
-                                <label for="location">Select a location:</label>
-                                <select name="location" id="location">
+                            <div class="form-group" style="display: flex;">
+                                <label for="location">Location
+                                <select name="location" id="location" class="form-control" required>
+                                    <option value="">-- Select a location --</option>
+                                    <option value="Zone 1 Lot 1">Zone 1 Lot 1</option>
+                                    <option value="Zone 1 Lot 2">Zone 1 Lot 2</option>
+                                    <option value="Zone 2 Lot 1">Zone 2 Lot 1</option>
+                                    <option value="Zone 2 Lot 2">Zone 2 Lot 2</option>
+                                    <option value="Zone 3 Lot 1">Zone 3 Lot 1</option>
+                                    <option value="Zone 3 Lot 2">Zone 3 Lot 2</option>
+                                </select></label>
+                                <label for="date" style="margin-left: 10px;">Date
+                                <input type="date" class="form-control" id="date" name="date" required></label>
+                                <input type="hidden" class="form-control" id="exit_time" name="exit_time"></label>
 
-                                    placeholder="Enter location" required>
-                                    <option value="">-- Select an Location --</option>
-                                    <option value="">Zone 1 Lot 1</option>
-                                    <option value="">Zone 1 Lot 2</option>
-                                    <option value="">Zone 1 Lot 3</option>
-                                    <option value="">Zone 2 Lot 1</option>
-                                    <option value="">Zone 2 Lot 2</option>
-                                    <option value="">Zone 2 Lot 3</option>
-                                    <option value="">Zone 3 Lot 1</option>
-                                    <option value="">Zone 3 Lot 2</option>
-                                    <option value="">Zone 3 Lot 3</option>
-
-                                </select>
-                                </label>
-                                <label for="">
-                                    <input type="hidden" class="form-control" id="date" name="exit_time">
-                                </label>
-                                <label for="date">Date
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="permit">Do You have Permit
@@ -177,6 +177,7 @@ include('auth.php');
                             <button type="submit" class="btn btn-primary" name="submit" required>Issue Parking</button>
                             <button type="reset" class="btn btn-primary">Cancel</button>
                         </form>
+
 
                     </div>
                 </div>

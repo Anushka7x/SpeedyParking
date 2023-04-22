@@ -125,6 +125,10 @@ if (isset($_GET['logout'])) {
     header('location: log in.php');
 }
 
+
+
+
+//permit 
 if (isset($_POST['insert'])) {
     // Get form data and sanitize input
     $name = $_POST['name'];
@@ -133,51 +137,50 @@ if (isset($_POST['insert'])) {
     $capacity = $_POST['capacity'];
     $vehicle_number = $_POST['vehiclenumber'];
     $location = $_POST['location'];
-    
+
     // Insert data into MySQL database
     $sql = "INSERT INTO apartment_rentals (id,name, end_date, apartment_address, capacity, vehicle_number, location) 
             VALUES ('','$name',  '$end_date', '$apartment_address', '$capacity', '$vehicle_number', '$location')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>
-        swal({
-            title: 'Permitted',
-            text: 'Now Permitted!',
-            type: 'success',
-            timer: 2000,
-            showConfirmButton: false
-        });
-        setTimeout(function(){
-            window.location.href = 'appartmentpark.php';
-        }, 2000);
-      </script>";
-      
-      try {
-        // Attempt to insert the new record into the apartmental_rental table
-        $stmt = mysqli_prepare($conn, "INSERT INTO apartmental_rental (vehicle_number, owner_name) VALUES (?, ?)");
-        mysqli_stmt_bind_param($stmt, "ss", $vehicle_number, $name);
-        mysqli_stmt_execute($stmt);
-        
-        // If the insertion succeeds, do any additional processing here
-        // ...
-        
-      } catch (mysqli_sql_exception $e) {
-        // If the insertion fails due to a duplicate vehicle number, handle the error here
-        if ($e->getCode() == 23000) {
+        $stmt = mysqli_prepare($conn, "INSERT INTO apartment_rentals (vehicle_number, name) VALUES (?, ?)");
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ss", $vehicle_number, $name);
+            mysqli_stmt_execute($stmt);
+
+            // If the insertion succeeds, show a success message
             echo "<script>
-        swal({
-          title: 'Error!',
-          text: 'Something went wrong!',
-          icon: 'error',
-          button: 'OK'
-        });
-        </script>";        } else {
-          echo "" . $e->getMessage();
+                swal({
+                    title: 'Permitted',
+                    text: 'Now Permitted!',
+                    type: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                setTimeout(function(){
+                    window.location.href = 'appartmentpark.php';
+                }, 2000);
+            </script>";
+        } else {
+            // If the prepared statement creation fails, show an error message
+            echo "Error: " . "<br>" . mysqli_error($conn);
         }
-      }
-      
     } else {
-        echo "Error: ". "<br>" . mysqli_error($conn);
+        // If the insertion fails due to a duplicate vehicle number, show a warning message
+        if (mysqli_errno($conn) == 1062) {
+            echo "<script>
+                swal({
+                    title: 'Warning',
+                    text: 'Vehicle number already exists in the database.',
+                    type: 'warning',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            </script>";
+        } else {
+            // Otherwise, show an error message
+            echo "Error: " . "<br>" . mysqli_error($conn);
+        }
     }
 }
 
@@ -236,29 +239,42 @@ if (isset($_POST['visitorsubmit'])) {
     $inTime = $_POST['datetime'];
     $paymentType = $_POST['payment'];
 
-    // create SQL query for insert operation
-    $sql = "INSERT INTO visitor_ft  (vehicle_number , optionsRadio ,location , payment )  VALUES ('$vehicleNo', '$vehicleType','$location', '$paymentType')";
+    // check if vehicle number already exists
+    $Query = "SELECT * FROM (SELECT vehicle_number FROM two_wheeler UNION SELECT vehicle_number FROM four_wheeler UNION SELECT vehicle_number FROM apartment_rentals) AS t WHERE t.vehicle_number = '$vehicleNo'";
+    $result = mysqli_query($conn, $Query);
 
-    // execute query and check for errors
-    if (mysqli_query($conn, $sql)) {
-        header("Location:visiter SM.php");
+    if (mysqli_num_rows($result) > 0) {
+        // If the vehicle number exists, show a warning message
+        echo "<script>
+            swal({
+                title: 'Warning',
+                text: 'Please Enter Correct Vehicle Number.',
+                type: 'warning',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        </script>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        // If the vehicle number does not exist, insert the new record
+        $sql = "INSERT INTO visitor_ft (vehicle_number, optionsRadio, location, payment) VALUES ('$vehicleNo', '$vehicleType','$location', '$paymentType')";
+        if (mysqli_query($conn, $sql)) {
+            header("Location:visiter SM.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-} //deleted 
-// update code in visitor SM
-
+}
 
 if (isset($_POST['updatevisitorsubmit'])) {
     // retrieve form values
     $id = $_POST['id'];
-    $vehicleNo = $_POST['vehicleno'];
+    $vehicleNo = $_POST['vehicle_number'];
     $vehicleType = $_POST['optionsRadio'];
     $location = $_POST['location'];
     $paymentType = $_POST['payment'];
 
     // create SQL query for update operation
-    $supdate = "UPDATE visitor_ft SET vehicleno='$vehicleNo', optionsRadio='$vehicleType', location='$location', payment='$paymentType' WHERE id='$id'";
+    $supdate = "UPDATE visitor_ft SET vehicle_number='$vehicleNo', optionsRadio='$vehicleType', location='$location', payment='$paymentType' WHERE id='$id'";
 
     // execute query and check for errors
     if (mysqli_query($conn, $supdate)) {
@@ -282,10 +298,11 @@ if (isset($_POST['submit'])) {
     // $query = "SELECT * FROM apartment_rentals WHERE  vehicle_number='$vehicleNumber'";
     // $result = mysqli_query($conn, $query);
     // $apCount=mysqli_num_rows($result);
-    $query1 = "SELECT * FROM two_wheeler WHERE vehicle_number = '$vehicleNumber' AND updated_type = 'Updated'";
+    $query1 = "SELECT * FROM two_wheeler WHERE vehicle_number='$vehicleNumber' AND (updated_type IS NULL) ";
     $result1 = mysqli_query($conn, $query1);
     $twCount = mysqli_num_rows($result1);
-    $query2 = "SELECT * FROM four_wheeler WHERE  vehicle_number='$vehicleNumber'";
+
+    $query2 = "SELECT * FROM four_wheeler WHERE  vehicle_number='$vehicleNumber' AND (updated_type IS NULL)";
     $result2 = mysqli_query($conn, $query2);
     $fwCount = mysqli_num_rows($result2);
     if ($twCount == 0 && $fwCount == 0) {
@@ -293,7 +310,7 @@ if (isset($_POST['submit'])) {
 
         if ($permit == 'Yes') {
             // Check if the person is a permitted member in the database
-            $query = "SELECT * FROM apartment_rentals WHERE name='$OwnersName' AND vehicle_number='$vehicleNumber'";
+            $query = "SELECT * FROM apartment_rentals WHERE vehicle_number='$vehicleNumber'";
             $result = mysqli_query($conn, $query);
 
 
@@ -307,10 +324,10 @@ if (isset($_POST['submit'])) {
         }
 
         if ($vehicleType == 'two_wheeler') {
-            $insertQuery = "INSERT INTO two_wheeler (id,OwnersName, vehicle_number,vehicle_type, location, exit_time, permit) 
+            $insertQuery = "INSERT INTO two_wheeler(id,OwnersName, vehicle_number,vehicle_type, location, exit_time, permit) 
 VALUES ('','$OwnersName', '$vehicleNumber', '$vehicleType','$location', '$exit_time', '$permitStatus')";
         } else {
-            $insertQuery = "INSERT INTO four_wheeler (id,OwnersName, vehicle_number,vehicle_type, location, exit_time, permit) 
+            $insertQuery = "INSERT INTO four_wheeler(id,OwnersName, vehicle_number,vehicle_type, location, exit_time, permit) 
 VALUES ('','$OwnersName', '$vehicleNumber','$vehicleType', '$location', '$exit_time', '$permitStatus')";
         }
 

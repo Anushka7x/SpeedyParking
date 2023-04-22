@@ -2,6 +2,19 @@
 
 include 'action.php';
 include 'auth.php';
+
+$sql = "SELECT COUNT(*) FROM visitor_ft WHERE vehicle_number IS NOT NULL";
+$result = mysqli_query($conn, $sql);
+$occupied = mysqli_fetch_array($result)[0];
+
+// Calculate the count of available parking slots
+$available = 200 - $occupied;
+
+// Output the result
+
+// Close the database connection
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +43,34 @@ include 'auth.php';
   <?php
   include 'header.php';
   ?>
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Total Parking </div>
+                    <div class="panel-body">
+                        <?php echo '200'?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Available Parking Slots</div>
+                    <div class="panel-body">
+                        <?php echo $available ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Occupied Parking</div>
+                    <div class="panel-body">
+                        <?php echo $occupied ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   <div class="container">
     <div class="row">
       <div class="col-md-5" style="border-right: 1px solid #ccc;">
@@ -44,8 +85,8 @@ include 'auth.php';
           <div class="form-group">
             <label for="vehicleType">Vehicle Type</label>
             <div class="radio">
-              <label><input type="radio" name="optionsRadio" value="car"> Car</label>
-              <label><input type="radio" name="optionsRadio" value="bike"> Bike</label>
+              <label><input type="radio" name="optionsRadio" value="Car"> Car</label>
+              <label><input type="radio" name="optionsRadio" value="Bike"> Bike</label>
             </div>
           </div>
 

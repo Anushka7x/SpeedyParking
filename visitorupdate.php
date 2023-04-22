@@ -44,7 +44,7 @@ $arrdata = mysqli_fetch_assoc($showdata);
             <input type="hidden" name="id" value="<?php echo $arrdata['id']; ?>">
             <div class="form-group">
                 <label for="vehicleNumber">Vehicle Number
-                    <input type="text" class="form-control" id="vehicleno" name="vehicleno" value="<?php echo $arrdata['vehicleno']; ?>">
+                    <input type="text" class="form-control" id="vehicleNumber" name="vehicle_number" value="<?php echo $arrdata['vehicle_number']; ?>">
                 </label>
             </div>
 

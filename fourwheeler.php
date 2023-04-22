@@ -5,16 +5,12 @@
     include 'auth.php';
 
 // total counts of permit
-$sql = "SELECT COUNT(*) FROM four_wheeler";
+$sql = "SELECT COUNT(*) FROM four_wheeler WHERE vehicle_number IS NOT NULL";
 $result = mysqli_query($conn, $sql);
+$occupied = mysqli_fetch_array($result)[0];
 
-// Check if the query was successful
-if (!$result) {
-  die("Error: " . mysqli_error($conn));
-}
-
-// Fetch the result
-$totalparking = mysqli_fetch_array($result)[0];
+// Calculate the count of available parking slots
+$available = 250 - $occupied;
 ?>
 
 <head>
@@ -45,19 +41,19 @@ include('header.php');?>
       <div class="col-md-4">
         <div class="panel panel-primary">
           <div class="panel-heading">Total Four Wheeler Capacity</div>
-          <div class="panel-body"><?php echo $totalparking?></div>
+          <div class="panel-body"><?php echo '250'?></div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="panel panel-success">
           <div class="panel-heading">Available Parking Slots</div>
-          <div class="panel-body">300</div>
+          <div class="panel-body"><?php Echo $available?></div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="panel panel-danger">
           <div class="panel-heading">Occupied Parking Slots</div>
-          <div class="panel-body">200</div>
+          <div class="panel-body"><?php echo $occupied?></div>
         </div>
       </div>
     </div>

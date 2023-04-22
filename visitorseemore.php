@@ -61,7 +61,7 @@ include 'auth.php';
                           ?>
                           <tr>
                           <td><?php echo $row['id'];?></td>
-                            <td><?php echo $row['vehicleno'];?></td>                            
+                            <td><?php echo $row['vehicle_number'];?></td>                            
                             <td><?php echo $row['optionsRadio'];?></td>
                             <td><?php echo $row['location'];?></td>
                             <td><?php echo $row['datetime'];?></td>
